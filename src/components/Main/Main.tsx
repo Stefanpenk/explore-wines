@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import ErrorCard from "../ErrorCard/ErrorCard";
 import LoadingCard from "../LoadingCard/LoadingCard";
+import WineCard from "../WineCard/WineCard";
 
 import { WineContext } from "../../context/wines.context";
 
@@ -17,7 +18,7 @@ const Main = () => {
     <div className={MainSCSS.container}>
       {wines &&
         wines.map((wine) => (
-          <div key={wine.vintage.id}>{wine.vintage.name}</div>
+          <WineCard singleWine={wine} key={wine.vintage.id} />
         ))}
     </div>
   );

@@ -1,0 +1,32 @@
+.buttonContainer {
+  margin-top: 10px;
+  background: #fff;
+  transition: background-color 0.5s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-decoration: none;
+  min-width: 70px;
+  border-radius: 2.5em;
+
+  &:hover {
+    background-color: #f2f2f2;
+  }
+}
+
+.greenButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 24px;
+  background-color: #00845f;
+  color: #fff;
+  border: 0;
+
+  &:hover {
+    background-color: #006b4d;
+  }
+}

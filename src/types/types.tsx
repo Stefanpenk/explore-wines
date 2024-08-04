@@ -26,3 +26,19 @@ export interface WineTypeContextType {
 export interface ApiResponse {
   matches: WineDetailsType[];
 }
+
+export type fallbackWineImgProp = {
+  winery: {
+    name: string;
+  };
+  name: string;
+  region: {
+    name: string;
+    country: string;
+  };
+  type_id: number;
+};
+
+export type WineDetailsTypeProps = {
+  singleWine: WineDetailsType;
+};
