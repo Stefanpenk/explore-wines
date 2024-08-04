@@ -21,6 +21,7 @@ export interface WineTypeContextType {
   wines: WineDetailsType[] | null;
   loading: boolean;
   error: string | null;
+  handleCountriesParams: (item: string) => void;
 }
 
 export interface ApiResponse {
@@ -41,4 +42,16 @@ export type fallbackWineImgProp = {
 
 export type WineDetailsTypeProps = {
   singleWine: WineDetailsType;
+};
+
+export type ButtonProps = {
+  children: string;
+  buttonLabel: string;
+  buttonClasses: string;
+  handleClick: () => void;
+};
+
+export type ButtonParamsProps = {
+  children: string;
+  buttonLabel: string;
 };
