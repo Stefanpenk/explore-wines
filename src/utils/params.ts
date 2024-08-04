@@ -46,3 +46,30 @@ export const CountriesButtonParams: ButtonParamsProps[] = [
     children: "United States",
   },
 ];
+
+export const wineTypesButtonParams: ButtonParamsProps[] = [
+  {
+    children: "Red",
+    buttonLabel: "1",
+  },
+  {
+    children: "White",
+    buttonLabel: "2",
+  },
+  {
+    children: "Sparkling",
+    buttonLabel: "3",
+  },
+  {
+    children: "Rosé",
+    buttonLabel: "4",
+  },
+  {
+    children: "Desert",
+    buttonLabel: "7",
+  },
+  {
+    children: "Fortified",
+    buttonLabel: "24",
+  },
+];
