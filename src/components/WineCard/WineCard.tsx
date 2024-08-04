@@ -5,10 +5,14 @@ import ButtonGreen from "../ButtonGreen/ButtonGreen";
 import { WineDetailsTypeProps } from "../../types/types";
 import { fallbackWineImgProp } from "../../types/types";
 
+import { currencyMap } from "../../utils/currencies.utils";
+
 import WineCardSCSS from "./WineCard.module.scss";
 
 const WineCard = ({ singleWine }: WineDetailsTypeProps) => {
   const { id, name, image, wine, statistics } = singleWine.vintage;
+  const currencyCode = singleWine.price.currency;
+  const currencyPrefix = currencyMap[currencyCode] ?? currencyCode;
 
   const fallbackWineImg = (wine: fallbackWineImgProp) => {
     const wineTypeId = wine.type_id;
@@ -38,7 +42,7 @@ const WineCard = ({ singleWine }: WineDetailsTypeProps) => {
       <div className={WineCardSCSS.container}>
         <div className={WineCardSCSS.imgContainer} style={divStyle}></div>
         <div className={WineCardSCSS.contentContainer}>
-          <div className="wine-card-country-info-container">
+          <div className={WineCardSCSS.countryInfoContainer}>
             <p className={WineCardSCSS.contentWinery}>{wine.winery.name}</p>
             <p className={WineCardSCSS.contentName}>{name}</p>
             <div className={WineCardSCSS.countryContainer}>
@@ -74,9 +78,7 @@ const WineCard = ({ singleWine }: WineDetailsTypeProps) => {
             {statistics.ratings_count} ratings
           </div>
           <ButtonGreen
-            children={`${singleWine.price.amount.toString()} ${
-              singleWine.price.currency
-            }`}
+            children={`${singleWine.price.amount.toString()} ${currencyPrefix}`}
           />
         </div>
       </div>

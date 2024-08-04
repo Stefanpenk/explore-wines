@@ -24,6 +24,7 @@ export interface WineTypeContextType {
   handleCountriesParams: (item: string) => void;
   handleWineTypeParams: (item: string) => void;
   handleRegionParams: (item: string) => void;
+  setRange: (item: number[]) => void;
 }
 
 export interface ApiResponse {
@@ -57,3 +58,10 @@ export type ButtonParamsProps = {
   children: string;
   buttonLabel: string;
 };
+
+export interface Currency {
+  code: string;
+  name: string;
+  prefix: string | null;
+  suffix: string | null;
+}

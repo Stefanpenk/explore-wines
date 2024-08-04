@@ -3,3 +3,9 @@
   flex-basis: 65%;
   padding-left: 30px;
 }
+
+@media screen and (max-width: 769px) {
+  .container {
+    padding-left: 0px;
+  }
+}

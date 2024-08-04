@@ -1,0 +1,13 @@
+.container {
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 769px) {
+  .container {
+    margin-bottom: 10px;
+
+    h2 {
+      font-size: 20px;
+    }
+  }
+}

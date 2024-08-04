@@ -12,6 +12,7 @@ export const WineContext = createContext<WineTypeContextType>({
   handleCountriesParams: () => {},
   handleWineTypeParams: () => {},
   handleRegionParams: () => {},
+  setRange: () => {},
 });
 
 export const WineProvider: React.FC<{ children: ReactNode }> = ({
@@ -23,6 +24,7 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
   const [countriesParams, setCountriesParams] = useState<string[]>([]);
   const [wineTypeParams, setWineTypeParams] = useState<string[]>([]);
   const [regionParams, setRegionParams] = useState<string[]>([]);
+  const [range, setRange] = useState<number[]>([100, 300]);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const handleCountriesParams = (country: string) => {
@@ -87,8 +89,10 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
     };
     const queryRegionString = regionUrl();
 
+    const priceRangeUrl = `&price_range_min=${range[0]}&price_range_max=${range[1]}`;
+
     const url = `https://corsproxy.io/?${encodeURIComponent(
-      `https://api.vivino.com/v/9.1.0/vintages/_explore?limit=10&country_code=us&min_critics_score=1${queryCountriesString}${queryTypeString}${queryRegionString}`
+      `https://api.vivino.com/v/9.1.0/vintages/_explore?limit=10&country_code=us&min_critics_score=1${queryCountriesString}${queryTypeString}${queryRegionString}${priceRangeUrl}`
     )}`;
 
     const fetchData = async () => {
@@ -104,18 +108,21 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
         });
         const result: ApiResponse = await response.json();
         setWines(result.matches);
-      } catch (error: any) {
-        if (error.name === "AbortError") {
-          console.log("Aborted");
-          return;
+      } catch (error) {
+        if (error instanceof Error) {
+          if (error.name === "AbortError") {
+            return;
+          }
+          setError("An unknown error occurred");
+        } else {
+          setError("An unexpected non-error object was thrown");
         }
-        setError("An unknown error occurred");
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, [countriesParams, wineTypeParams, regionParams]);
+  }, [countriesParams, wineTypeParams, regionParams, range]);
 
   const value = {
     wines,
@@ -124,6 +131,7 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
     handleCountriesParams,
     handleWineTypeParams,
     handleRegionParams,
+    setRange,
   };
 
   return <WineContext.Provider value={value}>{children}</WineContext.Provider>;

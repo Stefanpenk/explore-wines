@@ -23,15 +23,16 @@ const FilterCountries = () => {
       <div className={FilterCountriesSCSS.buttonContainer}>
         {CountriesButtonParams.map((button, index: number) => {
           const { children, buttonLabel } = button;
+
           const buttonClasses = `${RedButtonSCSS.buttonContainer} ${
             RedButtonSCSS.redButton
           } ${toggledArray[index] ? RedButtonSCSS.clicked : ""}`;
+
           const handleClick = (index: number) => {
             const newToggledArray = toggledArray.map((toggled, i) =>
               i === index ? !toggled : toggled
             );
             setToggledArray(newToggledArray);
-            console.log("clicked");
             handleCountriesParams(buttonLabel);
           };
           return (

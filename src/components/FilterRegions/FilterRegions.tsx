@@ -32,7 +32,6 @@ const FilterRegions = () => {
               i === index ? !toggled : toggled
             );
             setToggledArray(newToggledArray);
-            console.log("clicked", index);
             handleRegionParams(buttonLabel);
           };
           return (

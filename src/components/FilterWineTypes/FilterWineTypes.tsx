@@ -30,7 +30,6 @@ const FilterWineTypes = () => {
               i === index ? !toggled : toggled
             );
             setToggledArray(newToggledArray);
-            console.log("clicked");
             handleWineTypeParams(buttonLabel);
           };
           return (
