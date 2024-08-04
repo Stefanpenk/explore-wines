@@ -73,3 +73,30 @@ export const wineTypesButtonParams: ButtonParamsProps[] = [
     buttonLabel: "24",
   },
 ];
+
+export const RegionsButtonParams: ButtonParamsProps[] = [
+  {
+    children: "Bordeaux",
+    buttonLabel: "383",
+  },
+  {
+    children: "Bourgogne",
+    buttonLabel: "385",
+  },
+  {
+    children: "Napa Valley",
+    buttonLabel: "25",
+  },
+  {
+    children: "Piemonte",
+    buttonLabel: "389",
+  },
+  {
+    children: "Rhone Valley",
+    buttonLabel: "400",
+  },
+  {
+    children: "Toscana",
+    buttonLabel: "394",
+  },
+];

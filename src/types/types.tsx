@@ -23,6 +23,7 @@ export interface WineTypeContextType {
   error: string | null;
   handleCountriesParams: (item: string) => void;
   handleWineTypeParams: (item: string) => void;
+  handleRegionParams: (item: string) => void;
 }
 
 export interface ApiResponse {

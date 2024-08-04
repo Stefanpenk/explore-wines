@@ -11,6 +11,7 @@ export const WineContext = createContext<WineTypeContextType>({
   error: null,
   handleCountriesParams: () => {},
   handleWineTypeParams: () => {},
+  handleRegionParams: () => {},
 });
 
 export const WineProvider: React.FC<{ children: ReactNode }> = ({
@@ -21,6 +22,7 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
   const [error, setError] = useState<string | null>(null);
   const [countriesParams, setCountriesParams] = useState<string[]>([]);
   const [wineTypeParams, setWineTypeParams] = useState<string[]>([]);
+  const [regionParams, setRegionParams] = useState<string[]>([]);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const handleCountriesParams = (country: string) => {
@@ -39,6 +41,16 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
         return prevWineType.filter((type) => type !== wineType);
       } else {
         return [...prevWineType, wineType];
+      }
+    });
+  };
+
+  const handleRegionParams = (region: string) => {
+    setRegionParams((prev) => {
+      if (prev.includes(region)) {
+        return prev.filter((item) => item !== region);
+      } else {
+        return [...prev, region];
       }
     });
   };
@@ -66,8 +78,17 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
     };
     const queryTypeString = wineTypeUrl();
 
+    const regionUrl = () => {
+      if (regionParams.length > 0) {
+        return regionParams.map((param) => `&region_ids[]=${param}`).join("");
+      } else {
+        return "";
+      }
+    };
+    const queryRegionString = regionUrl();
+
     const url = `https://corsproxy.io/?${encodeURIComponent(
-      `https://api.vivino.com/v/9.1.0/vintages/_explore?limit=10&country_code=us&min_critics_score=1${queryCountriesString}${queryTypeString}`
+      `https://api.vivino.com/v/9.1.0/vintages/_explore?limit=10&country_code=us&min_critics_score=1${queryCountriesString}${queryTypeString}${queryRegionString}`
     )}`;
 
     const fetchData = async () => {
@@ -94,7 +115,7 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
       }
     };
     fetchData();
-  }, [countriesParams, wineTypeParams]);
+  }, [countriesParams, wineTypeParams, regionParams]);
 
   const value = {
     wines,
@@ -102,6 +123,7 @@ export const WineProvider: React.FC<{ children: ReactNode }> = ({
     loading,
     handleCountriesParams,
     handleWineTypeParams,
+    handleRegionParams,
   };
 
   return <WineContext.Provider value={value}>{children}</WineContext.Provider>;
