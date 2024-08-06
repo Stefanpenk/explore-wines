@@ -18,7 +18,7 @@ const WineCard = ({ singleWine }: WineDetailsTypeProps) => {
     const wineTypeId = wine.type_id;
 
     if (wineTypeId === 2) {
-      return "../../assets/fallback_1.png";
+      return "../../assets/fallback_2.png";
     } else if (wineTypeId === 3) {
       return "../../assets/fallback_3.png";
     } else if (wineTypeId === 4) {
